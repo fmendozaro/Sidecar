@@ -1,6 +1,7 @@
 package live.jrmd.sidecar.models;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "events")
@@ -23,6 +24,14 @@ public class Event {
 
     @Column(nullable = false)
     private String eventType;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name="events_categories",
+            joinColumns={@JoinColumn(name="event_id")},
+            inverseJoinColumns={@JoinColumn(name="category_id")}
+    )
+    private List<EventCategory> eCategoryList;
 
     public Event(){}
 
