@@ -45,4 +45,12 @@ public class POICategory {
     public void setName(String name) {
         this.name = name;
     }
+
+    public List<POI> getPoiList() {
+        return poiList;
+    }
+
+    public void setPoiList(List<POI> poiList) {
+        this.poiList = poiList;
+    }
 }

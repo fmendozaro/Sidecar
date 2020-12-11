@@ -45,4 +45,12 @@ public class EventCategory {
     public void setName(String name) {
         this.name = name;
     }
+
+    public List<Event> getEventList() {
+        return eventList;
+    }
+
+    public void setEventList(List<Event> eventList) {
+        this.eventList = eventList;
+    }
 }

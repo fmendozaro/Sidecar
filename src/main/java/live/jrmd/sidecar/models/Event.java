@@ -107,4 +107,12 @@ public class Event {
     public void setEventType(String eventType) {
         this.eventType = eventType;
     }
+
+    public List<EventCategory> geteCategoryList() {
+        return eCategoryList;
+    }
+
+    public void seteCategoryList(List<EventCategory> eCategoryList) {
+        this.eCategoryList = eCategoryList;
+    }
 }

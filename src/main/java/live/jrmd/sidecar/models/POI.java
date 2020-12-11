@@ -125,4 +125,12 @@ public class POI {
     public void setPhoto_url(String photo_url) {
         this.photo_url = photo_url;
     }
+
+    public List<POICategory> getpCategoryList() {
+        return pCategoryList;
+    }
+
+    public void setpCategoryList(List<POICategory> pCategoryList) {
+        this.pCategoryList = pCategoryList;
+    }
 }
