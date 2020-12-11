@@ -29,6 +29,7 @@ public class POI {
 
     public POI(){}
 
+    //read
     public POI(Long id, String name, String lat, String lon, String description, Long user_id, String photo_url) {
         this.id = id;
         this.name = name;
@@ -39,6 +40,17 @@ public class POI {
         this.photo_url = photo_url;
     }
 
+    //create
+    public POI(String name, String lat, String lon, String description, Long user_id, String photo_url) {
+        this.name = name;
+        this.lat = lat;
+        this.lon = lon;
+        this.description = description;
+        this.user_id = user_id;
+        this.photo_url = photo_url;
+    }
+
+    //copy
     public POI(POI copy) {
         this.id = copy.id;
         name = copy.name;
