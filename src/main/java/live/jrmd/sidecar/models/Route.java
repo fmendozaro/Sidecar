@@ -29,6 +29,10 @@ public class Route {
     @JoinColumn (name = "user_id")
     private User user;
 
+    @OneToMany
+    @JoinColumn (name = "route_id")
+    private Route route;
+
     public Route() {}
 
     //write
@@ -104,5 +108,13 @@ public class Route {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Route getRoute() {
+        return route;
+    }
+
+    public void setRoute(Route route) {
+        this.route = route;
     }
 }

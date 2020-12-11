@@ -107,4 +107,20 @@ public class User {
     public void setPhoto_url(String photo_url) {
         this.photo_url = photo_url;
     }
+
+    public List<Route> getRoutes() {
+        return routes;
+    }
+
+    public void setRoutes(List<Route> routes) {
+        this.routes = routes;
+    }
+
+    public List<RouteComment> getRouteComments() {
+        return routeComments;
+    }
+
+    public void setRouteComments(List<RouteComment> routeComments) {
+        this.routeComments = routeComments;
+    }
 }
