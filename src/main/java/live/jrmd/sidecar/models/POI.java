@@ -1,6 +1,7 @@
 package live.jrmd.sidecar.models;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "POI")
@@ -26,6 +27,14 @@ public class POI {
 
     @Column
     private String photo_url;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name="pois_categories",
+            joinColumns={@JoinColumn(name="pois_id")},
+            inverseJoinColumns={@JoinColumn(name="category_id")}
+    )
+    private List<POICategory> pCategoryList;
 
     public POI(){}
 
@@ -115,5 +124,13 @@ public class POI {
 
     public void setPhoto_url(String photo_url) {
         this.photo_url = photo_url;
+    }
+
+    public List<POICategory> getpCategoryList() {
+        return pCategoryList;
+    }
+
+    public void setpCategoryList(List<POICategory> pCategoryList) {
+        this.pCategoryList = pCategoryList;
     }
 }
