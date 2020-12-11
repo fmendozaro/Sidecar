@@ -2,6 +2,7 @@ package live.jrmd.sidecar.models;
 
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -24,6 +25,12 @@ public class User {
 
     @Column(length = 255)
     private String photo_url;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "route")
+    private List<Route> routes;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "route_comment")
+    private List<RouteComment> routeComments;
 
     public User(){}
     //read
