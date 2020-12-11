@@ -37,6 +37,7 @@ public class POI {
     private List<POICategory> pCategoryList;
 
     public POI(){}
+
     //read
     public POI(Long id, String name, String lat, String lon, String description, Long user_id, String photo_url) {
         this.id = id;
@@ -47,6 +48,7 @@ public class POI {
         this.user_id = user_id;
         this.photo_url = photo_url;
     }
+
     //create
     public POI(String name, String lat, String lon, String description, Long user_id, String photo_url) {
         this.name = name;
@@ -56,6 +58,8 @@ public class POI {
         this.user_id = user_id;
         this.photo_url = photo_url;
     }
+
+    //copy
     public POI(POI copy) {
         this.id = copy.id;
         name = copy.name;
