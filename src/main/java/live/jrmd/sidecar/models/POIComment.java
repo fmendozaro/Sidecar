@@ -22,7 +22,7 @@ public class POIComment {
     private String timestamp;
 
     public POIComment(){}
-
+    //read
     public POIComment(Long id, Long POI_id, Long user_id, String comment, String timestamp) {
         this.id = id;
         this.POI_id = POI_id;
@@ -30,7 +30,14 @@ public class POIComment {
         this.comment = comment;
         this.timestamp = timestamp;
     }
-
+    //create
+    public POIComment(Long POI_id, Long user_id, String comment, String timestamp) {
+        this.POI_id = POI_id;
+        this.user_id = user_id;
+        this.comment = comment;
+        this.timestamp = timestamp;
+    }
+    //copy
     public POIComment(POIComment copy) {
         id = copy.id;
         POI_id = copy.POI_id;
