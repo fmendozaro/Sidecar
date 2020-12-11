@@ -35,6 +35,7 @@ public class Event {
 
     public Event(){}
 
+    //read
     public Event(Long id, String name, String description, String date, String zipcode, String eventType) {
         this.id = id;
         this.name = name;
@@ -43,7 +44,7 @@ public class Event {
         this.zipcode = zipcode;
         this.eventType = eventType;
     }
-
+    //create
     public Event(String name, String description, String date, String zipcode, String eventType) {
         this.name = name;
         this.description = description;
@@ -51,7 +52,6 @@ public class Event {
         this.zipcode = zipcode;
         this.eventType = eventType;
     }
-
     public Event (Event copy){
         this.name = copy.name;
         this.description = copy.description

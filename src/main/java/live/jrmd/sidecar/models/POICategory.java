@@ -4,8 +4,8 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "eCategories")
-public class EventCategory {
+@Table(name = "pCategories")
+public class POICategory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -13,19 +13,19 @@ public class EventCategory {
     @Column(nullable = false)
     private String name;
 
-    @ManyToMany(mappedBy = "eCategories")
-    private List<Event> eventList;
+    @ManyToMany(mappedBy = "pCategories")
+    private List<POI> poiList;
 
-    public EventCategory(){}
+    public POICategory(){}
 
-    public EventCategory(Long id, String name) {
+    public POICategory(Long id, String name) {
         this.id = id;
         this.name = name;
     }
-    public EventCategory(String name) {
+    public POICategory(String name) {
         this.name = name;
     }
-    public EventCategory(EventCategory copy){
+    public POICategory(POICategory copy){
         this.id = copy.id;
         this.name = copy.name;
     }

@@ -25,6 +25,7 @@ public class Motorcycle {
     private String style;
 
     public Motorcycle(){}
+    //read
     public Motorcycle(Long id, String year, String make, String model, String photo_url, String style) {
         this.id = id;
         this.year = year;
@@ -33,6 +34,7 @@ public class Motorcycle {
         this.photo_url = photo_url;
         this.style = style;
     }
+    //create
     public Motorcycle(String year, String make, String model, String photo_url, String style) {
         this.year = year;
         this.make = make;
