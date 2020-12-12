@@ -25,13 +25,13 @@ public class Event {
     @Column(nullable = false)
     private String eventType;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(
-            name="events_categories",
-            joinColumns={@JoinColumn(name="event_id")},
-            inverseJoinColumns={@JoinColumn(name="category_id")}
-    )
-    private List<EventCategory> eCategoryList;
+//    @ManyToMany(cascade = CascadeType.ALL)
+//    @JoinTable(
+//        name = "events_categories",
+//        joinColumns = {@JoinColumn(name = "event_id")},
+//        inverseJoinColumns = {@JoinColumn(name = "category_id")}
+//    )
+//    private List<EventCategory> eventCategories;
 
     public Event(){}
 
@@ -54,7 +54,7 @@ public class Event {
     }
     public Event (Event copy){
         this.name = copy.name;
-        this.description = copy.description
+        this.description = copy.description;
         this.date = copy.date;
         this.zipcode = copy.zipcode;
         this.eventType = copy.eventType;
@@ -108,11 +108,11 @@ public class Event {
         this.eventType = eventType;
     }
 
-    public List<EventCategory> geteCategoryList() {
-        return eCategoryList;
-    }
-
-    public void seteCategoryList(List<EventCategory> eCategoryList) {
-        this.eCategoryList = eCategoryList;
-    }
+//    public List<EventCategory> getEventCategories() {
+//        return eventCategories;
+//    }
+//
+//    public void setEventCategories(List<EventCategory> eventCategories) {
+//        this.eventCategories = eventCategories;
+//    }
 }

@@ -15,13 +15,13 @@ public class RouteComment {
     @Column(nullable = false, columnDefinition = "DATETIME")
     private String timestamp;
 
-    @ManyToOne
-    @JoinColumn (name = "user_id")
-    private User user;
+//    @ManyToOne
+//    @JoinColumn (name = "user_id")
+//    private User user;
 
-    @ManyToOne
-    @JoinColumn (name = "route_id")
-    private Route route;
+//    @ManyToOne
+//    @JoinColumn (name = "route_id")
+//    private Route route;
 
     public RouteComment() {}
 
@@ -62,19 +62,19 @@ public class RouteComment {
         this.timestamp = timestamp;
     }
 
-    public User getUser() {
-        return user;
-    }
+//    public User getUser() {
+//        return user;
+//    }
+//
+//    public void setUser(User user) {
+//        this.user = user;
+//    }
 
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public Route getRoute() {
-        return route;
-    }
-
-    public void setRoute(Route route) {
-        this.route = route;
-    }
+//    public Route getRoute() {
+//        return route;
+//    }
+//
+//    public void setRoute(Route route) {
+//        this.route = route;
+//    }
 }
