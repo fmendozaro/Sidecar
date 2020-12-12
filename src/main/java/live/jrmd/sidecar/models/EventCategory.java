@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "eCategories")
+@Table(name = "e_categories")
 public class EventCategory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -13,8 +13,8 @@ public class EventCategory {
     @Column(nullable = false)
     private String name;
 
-    @ManyToMany(mappedBy = "eCategories")
-    private List<Event> eventList;
+//    @ManyToMany(mappedBy = "e_categories")
+//    private List<Event> events;
 
     public EventCategory(){}
 
@@ -46,11 +46,11 @@ public class EventCategory {
         this.name = name;
     }
 
-    public List<Event> getEventList() {
-        return eventList;
-    }
-
-    public void setEventList(List<Event> eventList) {
-        this.eventList = eventList;
-    }
+//    public List<Event> getEvents() {
+//        return events;
+//    }
+//
+//    public void setEvents(List<Event> events) {
+//        this.events = events;
+//    }
 }

@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "pCategories")
+@Table(name = "p_categories")
 public class POICategory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -13,8 +13,8 @@ public class POICategory {
     @Column(nullable = false)
     private String name;
 
-    @ManyToMany(mappedBy = "pCategories")
-    private List<POI> poiList;
+//    @ManyToMany(mappedBy = "p_categories")
+//    private List<POI> poiList;
 
     public POICategory(){}
 
@@ -46,11 +46,11 @@ public class POICategory {
         this.name = name;
     }
 
-    public List<POI> getPoiList() {
-        return poiList;
-    }
-
-    public void setPoiList(List<POI> poiList) {
-        this.poiList = poiList;
-    }
+//    public List<POI> getPoiList() {
+//        return poiList;
+//    }
+//
+//    public void setPoiList(List<POI> poiList) {
+//        this.poiList = poiList;
+//    }
 }

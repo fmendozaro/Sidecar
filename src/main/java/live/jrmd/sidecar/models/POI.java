@@ -28,13 +28,13 @@ public class POI {
     @Column
     private String photo_url;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(
-            name="pois_categories",
-            joinColumns={@JoinColumn(name="pois_id")},
-            inverseJoinColumns={@JoinColumn(name="category_id")}
-    )
-    private List<POICategory> pCategoryList;
+//    @ManyToMany(cascade = CascadeType.ALL)
+//    @JoinTable(
+//            name="pois_categories",
+//            joinColumns={@JoinColumn(name="pois_id")},
+//            inverseJoinColumns={@JoinColumn(name="category_id")}
+//    )
+//    private List<POICategory> pCategoryList;
 
     public POI(){}
 
@@ -126,11 +126,11 @@ public class POI {
         this.photo_url = photo_url;
     }
 
-    public List<POICategory> getpCategoryList() {
-        return pCategoryList;
-    }
-
-    public void setpCategoryList(List<POICategory> pCategoryList) {
-        this.pCategoryList = pCategoryList;
-    }
+//    public List<POICategory> getpCategoryList() {
+//        return pCategoryList;
+//    }
+//
+//    public void setpCategoryList(List<POICategory> pCategoryList) {
+//        this.pCategoryList = pCategoryList;
+//    }
 }
