@@ -17,19 +17,31 @@ public class User {
     @Column(nullable = false, length = 100, unique = true)
     private String email;
 
-    @Column(nullable = false, length = 255)
+    @Column(nullable = false)
     private String password;
 
     @Column(length = 10)
     private String zipcode;
 
-    @Column(length = 255)
+    @Column()
     private String photo_url;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "route")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private List<Motorcycle> motorcycles;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private List<POI> poiList;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private List<POIComment> poiComments;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private List<Event> events;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<Route> routes;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "route_comment")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<RouteComment> routeComments;
 
     public User(){}
@@ -122,5 +134,37 @@ public class User {
 
     public void setRouteComments(List<RouteComment> routeComments) {
         this.routeComments = routeComments;
+    }
+
+    public List<Motorcycle> getMotorcycles() {
+        return motorcycles;
+    }
+
+    public void setMotorcycles(List<Motorcycle> motorcycles) {
+        this.motorcycles = motorcycles;
+    }
+
+    public List<POI> getPoiList() {
+        return poiList;
+    }
+
+    public void setPoiList(List<POI> poiList) {
+        this.poiList = poiList;
+    }
+
+    public List<POIComment> getPoiComments() {
+        return poiComments;
+    }
+
+    public void setPoiComments(List<POIComment> poiComments) {
+        this.poiComments = poiComments;
+    }
+
+    public List<Event> getEvents() {
+        return events;
+    }
+
+    public void setEvents(List<Event> events) {
+        this.events = events;
     }
 }

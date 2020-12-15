@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "pCategories")
+@Table(name = "p_categories")
 public class POICategory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -13,7 +13,7 @@ public class POICategory {
     @Column(nullable = false)
     private String name;
 
-    @ManyToMany(mappedBy = "pCategories")
+    @ManyToMany(mappedBy = "pCategoryList")
     private List<POI> poiList;
 
     public POICategory(){}
@@ -25,6 +25,7 @@ public class POICategory {
     public POICategory(String name) {
         this.name = name;
     }
+
     public POICategory(POICategory copy){
         this.id = copy.id;
         this.name = copy.name;

@@ -9,7 +9,7 @@ public class RouteComment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column (nullable = false, columnDefinition = "LONGTEXT")
+    @Column (nullable = false, columnDefinition = "TEXT")
     private String comment;
 
     @Column(nullable = false, columnDefinition = "DATETIME")
@@ -32,10 +32,21 @@ public class RouteComment {
     }
 
     //read
-    public RouteComment(long id, String comment, String timestamp) {
+    public RouteComment(long id, String comment, String timestamp, User user, Route route) {
         this.id = id;
         this.comment = comment;
         this.timestamp = timestamp;
+        this.user = user;
+        this.route = route;
+    }
+
+    //Copy
+    public RouteComment(RouteComment copy) {
+        id = copy.id;
+        comment = copy.comment;
+        timestamp = copy.timestamp;
+        user = copy.user;
+        route = copy.route;
     }
 
     public long getId() {

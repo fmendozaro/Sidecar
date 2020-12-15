@@ -25,24 +25,29 @@ public class Event {
     @Column(nullable = false)
     private String eventType;
 
+    @ManyToOne
+    @JoinColumn()
+    private User user;
+
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
-            name="events_categories",
-            joinColumns={@JoinColumn(name="event_id")},
-            inverseJoinColumns={@JoinColumn(name="category_id")}
+        name = "events_categories",
+        joinColumns = {@JoinColumn(name = "event_id")},
+        inverseJoinColumns = {@JoinColumn(name = "category_id")}
     )
-    private List<EventCategory> eCategoryList;
+    private List<EventCategory> eventCategories;
 
     public Event(){}
 
     //read
-    public Event(Long id, String name, String description, String date, String zipcode, String eventType) {
+    public Event(Long id, String name, String description, String date, String zipcode, String eventType, User user) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.date = date;
         this.zipcode = zipcode;
         this.eventType = eventType;
+        this.user = user;
     }
     //create
     public Event(String name, String description, String date, String zipcode, String eventType) {
@@ -54,7 +59,7 @@ public class Event {
     }
     public Event (Event copy){
         this.name = copy.name;
-        this.description = copy.description
+        this.description = copy.description;
         this.date = copy.date;
         this.zipcode = copy.zipcode;
         this.eventType = copy.eventType;
@@ -108,11 +113,19 @@ public class Event {
         this.eventType = eventType;
     }
 
-    public List<EventCategory> geteCategoryList() {
-        return eCategoryList;
+    public List<EventCategory> getEventCategories() {
+        return eventCategories;
     }
 
-    public void seteCategoryList(List<EventCategory> eCategoryList) {
-        this.eCategoryList = eCategoryList;
+    public void setEventCategories(List<EventCategory> eventCategories) {
+        this.eventCategories = eventCategories;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

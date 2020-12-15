@@ -9,6 +9,9 @@ public class Motorcycle {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
+    private String style;
+
     @Column (length = 4, nullable = false)
     private String year;
 
@@ -21,27 +24,31 @@ public class Motorcycle {
     @Column
     private String photo_url;
 
-    @Column(nullable = false)
-    private String style;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
     public Motorcycle(){}
     //read
-    public Motorcycle(Long id, String year, String make, String model, String photo_url, String style) {
+    public Motorcycle(Long id, String year, String make, String model, String photo_url, String style, User user) {
         this.id = id;
+        this.style = style;
         this.year = year;
         this.make = make;
         this.model = model;
         this.photo_url = photo_url;
-        this.style = style;
+        this.user = user;
     }
     //create
-    public Motorcycle(String year, String make, String model, String photo_url, String style) {
+    public Motorcycle(String year, String make, String model, String photo_url, String style, User user) {
         this.year = year;
         this.make = make;
         this.model = model;
         this.photo_url = photo_url;
         this.style = style;
+        this.user = user;
     }
+    //Copy
     public Motorcycle (Motorcycle copy){
         this.id = copy.id;
         this.make = copy.make;
@@ -49,6 +56,7 @@ public class Motorcycle {
         this.year = copy.year;
         this.style = copy.style;
         this.photo_url = copy.photo_url;
+        this.user = copy.user;
     }
 
     public Long getId() {
@@ -99,4 +107,11 @@ public class Motorcycle {
         this.style = style;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 }

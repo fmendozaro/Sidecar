@@ -2,6 +2,7 @@ package live.jrmd.sidecar.models;
 
 import javax.persistence.*;
 import java.security.PrivateKey;
+import java.util.List;
 
 @Entity
 @Table(name="routes")
@@ -19,19 +20,18 @@ public class Route {
     @Column(nullable = false, length = 25)
     private String time;
 
-    @Column(nullable = false, columnDefinition = "LONGTEXT")
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String description;
 
     @Column(nullable = false)
     private String api_url;
 
-    @ManyToOne
-    @JoinColumn (name = "user_id")
-    private User user;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "route")
+    private List<RouteComment> routeComments;
 
-    @OneToMany
-    @JoinColumn (name = "route_id")
-    private Route route;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
     public Route() {}
 
@@ -102,19 +102,19 @@ public class Route {
         this.api_url = newApi_Url;
     }
 
+    public List<RouteComment> getRouteComments() {
+        return routeComments;
+    }
+
+    public void setRouteComments(List<RouteComment> routeComments) {
+        this.routeComments = routeComments;
+    }
+
     public User getUser() {
         return user;
     }
 
     public void setUser(User user) {
         this.user = user;
-    }
-
-    public Route getRoute() {
-        return route;
-    }
-
-    public void setRoute(Route route) {
-        this.route = route;
     }
 }
