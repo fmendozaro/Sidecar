@@ -85,19 +85,19 @@
                 "latLng":  { lat: 29.44, lng: -98.5 },
                 "title": "Test1",
                 "type": "Bar/Restaurant",
-                "content": "test1"
+                "description": "A biker-friendly bar"
             },
             {
                 "latLng": { lat: 29.42, lng: -98.48},
                 "title": "Test2",
                 "type": "Scenic View",
-                "content": "test2"
+                "description": "nice view"
             },
             {
                 "latLng": { lat: 29.425, lng: -98.49},
                 "title": "Test3",
                 "type": "Repair Shop",
-                "content": "test3"
+                "description": "They know what they're doing"
             }
         ];
 
@@ -144,8 +144,10 @@
             }
         });
 
-        //Takes in the array of POIs and adds them onto the map
-        drawPOIs(poiList, icons, infoWindow, map);
+        //For each POI, add it to the map
+        poiList.forEach(function(poi) {
+            drawPOIs(poi, icons, infoWindow, map);
+        });
     }
 
     //If GeoLocation fails
@@ -178,26 +180,22 @@
         });
     }
 
-    //Adds markers for the POIs on the map
-    function drawPOIs(poiList, icons, infoWindow, map) {
+    //Adds markers for the POIs on the map and assigns their infowindow information
+    function drawPOIs(poi, icons, infoWindow, map) {
         //For each POI, add to map
-        for (var i = 0; i < poiList.length; i++) {
             let marker = new google.maps.Marker({
-                position: poiList[i].latLng,
-                title: poiList[i].title,
-                icon: icons[poiList[i].type].icon
+                position: poi.latLng,
+                title: poi.title,
+                //Looks at the poi type and references the icon array to determine what icon it uses
+                icon: icons[poi.type].icon
             });
             marker.setMap(map);
             //This connects the info window to the marker, allowing information, links, etc. to be displayed
-            //issue: No popup shows when I try to use variable data. Presumably it can't reach the information after the loop has been run?
             google.maps.event.addListener(marker, 'click', function() {
-                infoWindow.setContent("<h4>Test</h4>");
-                //Doesn't work
-                // infoWindow.setContent("<h4> Title: " + poiList[i].title + "</h4>" +
-                //                       "<p>Lat/Long: " + poiList[i].latLng + "</p>");
+                infoWindow.setContent("<h4> Title: " + poi.title + "</h4>" +
+                                      "<p>Lat/Long: " + poi.latLng + "</p>");
                 infoWindow.open(map, marker);
             });
-        }
     }
 </script>
 </body>
