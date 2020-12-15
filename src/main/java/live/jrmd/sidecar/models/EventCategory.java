@@ -13,8 +13,8 @@ public class EventCategory {
     @Column(nullable = false)
     private String name;
 
-//    @ManyToMany(mappedBy = "e_categories")
-//    private List<Event> events;
+    @ManyToMany(mappedBy = "eventCategories")
+    private List<Event> events;
 
     public EventCategory(){}
 
@@ -25,6 +25,7 @@ public class EventCategory {
     public EventCategory(String name) {
         this.name = name;
     }
+
     public EventCategory(EventCategory copy){
         this.id = copy.id;
         this.name = copy.name;
@@ -46,11 +47,11 @@ public class EventCategory {
         this.name = name;
     }
 
-//    public List<Event> getEvents() {
-//        return events;
-//    }
-//
-//    public void setEvents(List<Event> events) {
-//        this.events = events;
-//    }
+    public List<Event> getEvents() {
+        return events;
+    }
+
+    public void setEvents(List<Event> events) {
+        this.events = events;
+    }
 }

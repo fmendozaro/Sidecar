@@ -9,19 +9,19 @@ public class RouteComment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column (nullable = false, columnDefinition = "LONGTEXT")
+    @Column (nullable = false, columnDefinition = "TEXT")
     private String comment;
 
     @Column(nullable = false, columnDefinition = "DATETIME")
     private String timestamp;
 
-//    @ManyToOne
-//    @JoinColumn (name = "user_id")
-//    private User user;
+    @ManyToOne
+    @JoinColumn (name = "user_id")
+    private User user;
 
-//    @ManyToOne
-//    @JoinColumn (name = "route_id")
-//    private Route route;
+    @ManyToOne
+    @JoinColumn (name = "route_id")
+    private Route route;
 
     public RouteComment() {}
 
@@ -32,10 +32,21 @@ public class RouteComment {
     }
 
     //read
-    public RouteComment(long id, String comment, String timestamp) {
+    public RouteComment(long id, String comment, String timestamp, User user, Route route) {
         this.id = id;
         this.comment = comment;
         this.timestamp = timestamp;
+        this.user = user;
+        this.route = route;
+    }
+
+    //Copy
+    public RouteComment(RouteComment copy) {
+        id = copy.id;
+        comment = copy.comment;
+        timestamp = copy.timestamp;
+        user = copy.user;
+        route = copy.route;
     }
 
     public long getId() {
@@ -62,19 +73,19 @@ public class RouteComment {
         this.timestamp = timestamp;
     }
 
-//    public User getUser() {
-//        return user;
-//    }
-//
-//    public void setUser(User user) {
-//        this.user = user;
-//    }
+    public User getUser() {
+        return user;
+    }
 
-//    public Route getRoute() {
-//        return route;
-//    }
-//
-//    public void setRoute(Route route) {
-//        this.route = route;
-//    }
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Route getRoute() {
+        return route;
+    }
+
+    public void setRoute(Route route) {
+        this.route = route;
+    }
 }

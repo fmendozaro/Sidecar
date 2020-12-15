@@ -19,43 +19,54 @@ public class POI {
     @Column(nullable = false)
     private String lon;
 
-    @Column
+    @Column(columnDefinition = "TEXT")
     private String description;
-
-    @Column(nullable = false)
-    private Long user_id;
 
     @Column
     private String photo_url;
 
-//    @ManyToMany(cascade = CascadeType.ALL)
-//    @JoinTable(
-//            name="pois_categories",
-//            joinColumns={@JoinColumn(name="pois_id")},
-//            inverseJoinColumns={@JoinColumn(name="category_id")}
-//    )
-//    private List<POICategory> pCategoryList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "poi")
+    private List<POIComment> poiComments;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name="pois_categories",
+            joinColumns={@JoinColumn(name="poi_id")},
+            inverseJoinColumns={@JoinColumn(name="category_id")}
+    )
+    private List<POICategory> pCategoryList;
+
+    public List<POIComment> getPoiComments() {
+        return poiComments;
+    }
+
+    public void setPoiComments(List<POIComment> poiComments) {
+        this.poiComments = poiComments;
+    }
 
     public POI(){}
 
     //read
-    public POI(Long id, String name, String lat, String lon, String description, Long user_id, String photo_url) {
+    public POI(Long id, String name, String lat, String lon, String description, User user, String photo_url) {
         this.id = id;
         this.name = name;
         this.lat = lat;
         this.lon = lon;
         this.description = description;
-        this.user_id = user_id;
         this.photo_url = photo_url;
+        this.user = user;
     }
 
     //create
-    public POI(String name, String lat, String lon, String description, Long user_id, String photo_url) {
+    public POI(String name, String lat, String lon, String description, String photo_url) {
         this.name = name;
         this.lat = lat;
         this.lon = lon;
         this.description = description;
-        this.user_id = user_id;
         this.photo_url = photo_url;
     }
 
@@ -66,7 +77,6 @@ public class POI {
         lat = copy.lat;
         lon = copy.lon;
         description = copy.description;
-        user_id = copy.user_id;
         photo_url = copy.photo_url;
     }
 
@@ -110,14 +120,6 @@ public class POI {
         this.description = description;
     }
 
-    public Long getUser_id() {
-        return user_id;
-    }
-
-    public void setUser_id(Long user_id) {
-        this.user_id = user_id;
-    }
-
     public String getPhoto_url() {
         return photo_url;
     }
@@ -126,11 +128,19 @@ public class POI {
         this.photo_url = photo_url;
     }
 
-//    public List<POICategory> getpCategoryList() {
-//        return pCategoryList;
-//    }
-//
-//    public void setpCategoryList(List<POICategory> pCategoryList) {
-//        this.pCategoryList = pCategoryList;
-//    }
+    public List<POICategory> getpCategoryList() {
+        return pCategoryList;
+    }
+
+    public void setpCategoryList(List<POICategory> pCategoryList) {
+        this.pCategoryList = pCategoryList;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 }
