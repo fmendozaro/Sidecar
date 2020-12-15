@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="partials/head :: head('Add a Point of Interest')">
     <meta charset="UTF-8">
-    <title>Add a Point of Interest</title>
+    <title>Index</title>
     <script
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCMpJ-NawmnjMOSlkw5uXkLYjDTSzEmvag&callback=initMap&libraries=&v=weekly"
             defer
@@ -41,14 +42,20 @@
 </head>
 <body>
 <nav th:replace="partials/navbar :: nav"></nav>
-<main>
 
-    <h1>Sidecar Points of Interest</h1>
-    <div id="floating-panel">
-        <input id="address" type="textbox" placeholder="Enter a location" />
-        <input id="submit" type="button" value="View Location" />
+<main class="row w-100">
+    <div class="col-md-3" sec:authorize="isAuthenticated()">
+        <h5>Left column</h5>
     </div>
-    <div id="map"></div>
+    <div class="col-md-9">
+        <h4>Add a Point of Interest</h4>
+        <div id="floating-panel">
+            <input id="address" type="textbox" placeholder="Enter a location" />
+            <input id="submit" type="button" value="View Location" />
+        </div>
+        <div id="map"></div>
+    </div>
+
 
 </main>
 
@@ -63,7 +70,7 @@
 
     function initMap() {
         map = new google.maps.Map(document.getElementById("map"), {
-            center: {lat: 29.4241, lng: -98.4936},
+            center: { lat: 29.4241, lng: -98.4936 },
             zoom: 10,
         });
         geocoder = new google.maps.Geocoder();
@@ -71,6 +78,42 @@
             geocodeAddress(geocoder, map);
         });
         infoWindow = new google.maps.InfoWindow();
+
+        //test POIs
+        const poiList = [
+            {
+                "latLng":  { lat: 29.44, lng: -98.5 },
+                "title": "Test1",
+                "type": "Bar/Restaurant",
+                "content": "test1"
+            },
+            {
+                "latLng": { lat: 29.42, lng: -98.48},
+                "title": "Test2",
+                "type": "Scenic View",
+                "content": "test2"
+            },
+            {
+                "latLng": { lat: 29.425, lng: -98.49},
+                "title": "Test3",
+                "type": "Repair Shop",
+                "content": "test3"
+            }
+        ];
+
+        const iconBase = "http://maps.google.com/mapfiles/kml/pal2/";
+
+        const icons = {
+            "Bar/Restaurant": {
+                icon: iconBase + "icon32.png"
+            },
+            "Scenic View": {
+                icon: iconBase + "icon4.png"
+            },
+            "Repair Shop": {
+                icon: iconBase + "icon21.png"
+            }
+        }
 
         //Pan to current location button
         const locationButton = document.createElement("button");
@@ -100,7 +143,62 @@
                 handleLocationError(false, infoWindow, map.getCenter());
             }
         });
+
+        //Takes in the array of POIs and adds them onto the map
+        drawPOIs(poiList, icons, infoWindow, map);
     }
 
+    //If GeoLocation fails
+    function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+        infoWindow.setPosition(pos);
+        infoWindow.setContent(
+            browserHasGeolocation
+                ? "Error: The Geolocation service failed."
+                : "Error: Your browser doesn't support geolocation."
+        );
+        infoWindow.open(map);
+    }
+
+    //Geocoder, searches for input location and centers map on it
+    function geocodeAddress(geocoder, resultsMap) {
+        const address = document.getElementById("address").value;
+        geocoder.geocode({address: address}, (results, status) => {
+            if (status === "OK") {
+                resultsMap.setCenter(results[0].geometry.location);
+                //Commented out lines set a marker on the location, unsure if we want that or not
+                // new google.maps.Marker({
+                //     map: resultsMap,
+                //     position: results[0].geometry.location,
+                // });
+            } else {
+                alert(
+                    "Geocode was not successful for the following reason: " + status
+                );
+            }
+        });
+    }
+
+    //Adds markers for the POIs on the map
+    function drawPOIs(poiList, icons, infoWindow, map) {
+        //For each POI, add to map
+        for (var i = 0; i < poiList.length; i++) {
+            let marker = new google.maps.Marker({
+                position: poiList[i].latLng,
+                title: poiList[i].title,
+                icon: icons[poiList[i].type].icon
+            });
+            marker.setMap(map);
+            //This connects the info window to the marker, allowing information, links, etc. to be displayed
+            //issue: No popup shows when I try to use variable data. Presumably it can't reach the information after the loop has been run?
+            google.maps.event.addListener(marker, 'click', function() {
+                infoWindow.setContent("<h4>Test</h4>");
+                //Doesn't work
+                // infoWindow.setContent("<h4> Title: " + poiList[i].title + "</h4>" +
+                //                       "<p>Lat/Long: " + poiList[i].latLng + "</p>");
+                infoWindow.open(map, marker);
+            });
+        }
+    }
+</script>
 </body>
 </html>
