@@ -2,6 +2,7 @@ package live.jrmd.sidecar.models;
 
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -16,14 +17,32 @@ public class User {
     @Column(nullable = false, length = 100, unique = true)
     private String email;
 
-    @Column(nullable = false, length = 255)
+    @Column(nullable = false)
     private String password;
 
     @Column(length = 10)
     private String zipcode;
 
-    @Column(length = 255)
+    @Column()
     private String photo_url;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private List<Motorcycle> motorcycles;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private List<POI> poiList;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private List<POIComment> poiComments;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private List<Event> events;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private List<Route> routes;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private List<RouteComment> routeComments;
 
     public User(){}
     //read
@@ -99,5 +118,53 @@ public class User {
 
     public void setPhoto_url(String photo_url) {
         this.photo_url = photo_url;
+    }
+
+    public List<Route> getRoutes() {
+        return routes;
+    }
+
+    public void setRoutes(List<Route> routes) {
+        this.routes = routes;
+    }
+
+    public List<RouteComment> getRouteComments() {
+        return routeComments;
+    }
+
+    public void setRouteComments(List<RouteComment> routeComments) {
+        this.routeComments = routeComments;
+    }
+
+    public List<Motorcycle> getMotorcycles() {
+        return motorcycles;
+    }
+
+    public void setMotorcycles(List<Motorcycle> motorcycles) {
+        this.motorcycles = motorcycles;
+    }
+
+    public List<POI> getPoiList() {
+        return poiList;
+    }
+
+    public void setPoiList(List<POI> poiList) {
+        this.poiList = poiList;
+    }
+
+    public List<POIComment> getPoiComments() {
+        return poiComments;
+    }
+
+    public void setPoiComments(List<POIComment> poiComments) {
+        this.poiComments = poiComments;
+    }
+
+    public List<Event> getEvents() {
+        return events;
+    }
+
+    public void setEvents(List<Event> events) {
+        this.events = events;
     }
 }
