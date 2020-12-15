@@ -9,41 +9,44 @@ public class POIComment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
-    private Long POI_id;
-
-    @Column(nullable = false)
-    private Long user_id;
-
     @Column(nullable = false, columnDefinition = "TEXT")
     private String comment;
 
     @Column(nullable = false, columnDefinition = "DATETIME")
     private String timestamp;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "poi_id")
+    private POI poi;
+
     public POIComment(){}
-    //read
-    public POIComment(Long id, Long POI_id, Long user_id, String comment, String timestamp) {
-        this.id = id;
-        this.POI_id = POI_id;
-        this.user_id = user_id;
-        this.comment = comment;
-        this.timestamp = timestamp;
-    }
+
     //create
-    public POIComment(Long POI_id, Long user_id, String comment, String timestamp) {
-        this.POI_id = POI_id;
-        this.user_id = user_id;
+    public POIComment(String comment, String timestamp) {
         this.comment = comment;
         this.timestamp = timestamp;
     }
+
+    //read
+    public POIComment(Long id, String comment, String timestamp, User user, POI poi) {
+        this.id = id;
+        this.comment = comment;
+        this.timestamp = timestamp;
+        this.user = user;
+        this.poi = poi;
+    }
+
     //copy
     public POIComment(POIComment copy) {
         id = copy.id;
-        POI_id = copy.POI_id;
-        user_id = copy.user_id;
         comment = copy.comment;
         timestamp = copy.timestamp;
+        user = copy.user;
+        poi = copy.poi;
     }
 
     public Long getId() {
@@ -52,22 +55,6 @@ public class POIComment {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getPOI_id() {
-        return POI_id;
-    }
-
-    public void setPOI_id(Long POI_id) {
-        this.POI_id = POI_id;
-    }
-
-    public Long getUser_id() {
-        return user_id;
-    }
-
-    public void setUser_id(Long user_id) {
-        this.user_id = user_id;
     }
 
     public String getComment() {
@@ -84,5 +71,21 @@ public class POIComment {
 
     public void setTimestamp(String timestamp) {
         this.timestamp = timestamp;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public POI getPoi() {
+        return poi;
+    }
+
+    public void setPoi(POI poi) {
+        this.poi = poi;
     }
 }

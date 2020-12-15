@@ -13,8 +13,8 @@ public class POICategory {
     @Column(nullable = false)
     private String name;
 
-//    @ManyToMany(mappedBy = "p_categories")
-//    private List<POI> poiList;
+    @ManyToMany(mappedBy = "pCategoryList")
+    private List<POI> poiList;
 
     public POICategory(){}
 
@@ -25,6 +25,7 @@ public class POICategory {
     public POICategory(String name) {
         this.name = name;
     }
+
     public POICategory(POICategory copy){
         this.id = copy.id;
         this.name = copy.name;
@@ -46,11 +47,11 @@ public class POICategory {
         this.name = name;
     }
 
-//    public List<POI> getPoiList() {
-//        return poiList;
-//    }
-//
-//    public void setPoiList(List<POI> poiList) {
-//        this.poiList = poiList;
-//    }
+    public List<POI> getPoiList() {
+        return poiList;
+    }
+
+    public void setPoiList(List<POI> poiList) {
+        this.poiList = poiList;
+    }
 }
