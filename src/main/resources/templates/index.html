@@ -8,19 +8,31 @@
 </head>
 <body>
     <nav th:replace="partials/navbar :: nav"></nav>
+    <header class="header">
+        <div class="header__logo-box">
+            <img src="./img/logo-white.png" alt="Logo" class="header__logo">
+        </div>
+        <div class="header__text-box">
+            <h1 class="heading-primary">
+                <span class="heading-primary--main">Life</span>
+                <span class="heading-primary--sub">it's just better on two wheels</span>
+            </h1>
 
+            <a href="/routes" class="btn btn--white btn--animated">Find your route</a>
+        </div>
+    </header>
     <main class="row w-100">
-        <div class="col-md-3" sec:authorize="isAuthenticated()">
-            <h5>Left column</h5>
-        </div>
-        <div class="col-md-9">
-            <h4>Sidecar Landing Page</h4>
-            <div id="floating-panel">
-                <input id="address" type="textbox" placeholder="Enter a location" />
-                <input id="submit" type="button" value="View Location" />
-            </div>
-            <div id="map"></div>
-        </div>
+<!--        <div class="col-md-3" sec:authorize="isAuthenticated()">-->
+<!--            <h5>Left column</h5>-->
+<!--        </div>-->
+<!--        <div class="col-md-9">-->
+<!--            <h4>Sidecar Landing Page</h4>-->
+<!--            <div id="floating-panel">-->
+<!--                <input id="address" type="textbox" placeholder="Enter a location" />-->
+<!--                <input id="submit" type="button" value="View Location" />-->
+<!--            </div>-->
+<!--            <div id="map"></div>-->
+<!--        </div>-->
     </main>
     <script src="src/main/resources/templates/js/indexMap.js"></script>
     <div th:include="partials/footer :: footer"></div>
