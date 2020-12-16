@@ -1,10 +1,8 @@
 package live.jrmd.sidecar.controllers;
 
 import live.jrmd.sidecar.models.User;
-import live.jrmd.sidecar.repositories.POIRepository;
-import live.jrmd.sidecar.repositories.RouteRepository;
-import live.jrmd.sidecar.repositories.UserRepository;
-import live.jrmd.sidecar.repositories.UsersRepository;
+import live.jrmd.sidecar.repositories.*;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,13 +16,15 @@ public class UserController {
     private final UserRepository userDao;
     private final RouteRepository routeDao;
     private final POIRepository poiDao;
+    private final EventRepository eventDao;
     private final UsersRepository users;
     private PasswordEncoder passwordEncoder;
 
-    public UserController(UserRepository userDao, RouteRepository routeDao, POIRepository poiDao, UsersRepository users, PasswordEncoder passwordEncoder) {
+    public UserController(UserRepository userDao, RouteRepository routeDao, POIRepository poiDao, EventRepository eventDao, UsersRepository users, PasswordEncoder passwordEncoder) {
         this.userDao = userDao;
         this.routeDao = routeDao;
         this.poiDao = poiDao;
+        this.eventDao = eventDao;
         this.users = users;
         this.passwordEncoder = passwordEncoder;
     }
@@ -47,5 +47,15 @@ public class UserController {
         user.setPassword(hash);
         users.save(user);
         return "redirect:/login";
+    }
+
+    @GetMapping("/profile")
+    public String showUserProfile(Model model){
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        model.addAttribute("user", userDao.getUserById(user.getId()));
+        model.addAttribute("routes", routeDao.findAllByUser(user));
+        model.addAttribute("pois", poiDao.findAllByUser(user));
+        model.addAttribute("events", eventDao.findAllByUser(user));
+        return "users/profile";
     }
 }
