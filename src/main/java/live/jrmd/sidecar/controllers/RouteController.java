@@ -18,6 +18,7 @@ public class RouteController {
         this.routeDao = routeDao;
         this.userDao = userDao;
     }
+
     @GetMapping("/routes")
     public String showAllRoutes(Model model){
         model.addAttribute("routes", routeDao.findAll());
