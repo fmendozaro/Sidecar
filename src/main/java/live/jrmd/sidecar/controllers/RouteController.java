@@ -19,6 +19,10 @@ public class RouteController {
         this.userDao = userDao;
     }
 
+    @GetMapping("/routes/create")
+    public String buildARoute(){
+        return "routes/create";
+    }
     @GetMapping("/routes")
     public String showAllRoutes(Model model){
         model.addAttribute("routes", routeDao.findAll());
